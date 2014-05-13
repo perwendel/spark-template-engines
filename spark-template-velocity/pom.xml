@@ -10,7 +10,7 @@
 	<artifactId>spark-template-velocity</artifactId>
 	<packaging>jar</packaging>
 	<version>2.0.0</version>
-	<name>Spark</name>
+	<name>spark-template-velocity</name>
 	<description>Apache Velocity Template View Route implementation for Spark</description>
 	<url>http://www.sparkjava.com</url>
 	<licenses>

@@ -10,7 +10,7 @@
 	<artifactId>spark-template-freemarker</artifactId>
 	<packaging>jar</packaging>
 	<version>2.0.0</version>
-	<name>Spark</name>
+	<name>spark-template-freemarker</name>
         <description>Freemarker Template View Route implementation for Spark</description>
 	    <url>http://www.sparkjava.com</url>
         <licenses>
