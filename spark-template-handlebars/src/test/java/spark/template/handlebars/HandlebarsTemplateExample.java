@@ -24,7 +24,7 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 import static spark.Spark.get;
 
 /**
- * Mustache template engine example
+ * Handlebars template engine example
  *
  * @author Sam Pullara https://github.com/spullara
  */
@@ -33,7 +33,7 @@ public class HandlebarsTemplateExample {
         Map map = new HashMap();
         map.put("name", "Sam");
 
-        // hello.mustache file is in resources/templates directory
+        // hello.hbs file is in resources/templates directory
         get("/hello", (rq, rs) -> new ModelAndView(map, "hello.hbs"), new HandlebarsTemplateEngine());
     }
 }
