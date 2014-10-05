@@ -10,6 +10,7 @@
         <module>spark-template-freemarker</module>
         <module>spark-template-velocity</module>
         <module>spark-template-mustache</module>
+        <module>spark-template-thymeleaf</module>
     </modules>
 
     <build>

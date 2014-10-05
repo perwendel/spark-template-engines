@@ -14,64 +14,69 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package spark.template.mustache;
+package spark.template.thymeleaf;
 
-import java.io.IOException;
-import java.io.StringWriter;
 
-import org.eclipse.jetty.io.RuntimeIOException;
 
+import org.thymeleaf.context.Context;
+import org.thymeleaf.resourceresolver.ClassLoaderResourceResolver;
+import org.thymeleaf.templateresolver.TemplateResolver;
 import spark.ModelAndView;
 import spark.TemplateEngine;
+import java.util.Map;
 
-import com.github.mustachejava.DefaultMustacheFactory;
-import com.github.mustachejava.Mustache;
-import com.github.mustachejava.MustacheFactory;
 
 /**
  * Defaults to the 'templates' directory under the resource path.
  *
- * @author Sam Pullara https://github.com/spullara
+ * @author David Vaillant https://github.com/dvaillant
  */
-public class MustacheTemplateEngine extends TemplateEngine {
+public class ThymeleafTemplateEngine extends TemplateEngine {
 
-    private MustacheFactory mustacheFactory;
+    private org.thymeleaf.TemplateEngine templateEngine;
 
     /**
-     * Constructs a mustache template engine
+     * Constructs a default thymeleaf template engine
      */
-    public MustacheTemplateEngine() {
-        mustacheFactory = new DefaultMustacheFactory("templates");
+    public ThymeleafTemplateEngine() {
+
+        TemplateResolver defaultTemplateResolver =
+                new TemplateResolver();
+        defaultTemplateResolver.setTemplateMode("XHTML");
+        defaultTemplateResolver.setPrefix("templates/");
+        defaultTemplateResolver.setSuffix(".html");
+        defaultTemplateResolver.setCacheTTLMs(3600000L);
+
+        defaultTemplateResolver.setResourceResolver(new ClassLoaderResourceResolver());
+
+        templateEngine = new org.thymeleaf.TemplateEngine();
+        templateEngine.setTemplateResolver(defaultTemplateResolver);
     }
 
     /**
-     * Constructs a mustache template engine
-     *
-     * @param resourceRoot the resource root
+     * Constructs a thymeleaf template engine
+     * @param templateResolver
      */
-    public MustacheTemplateEngine(String resourceRoot) {
-        mustacheFactory = new DefaultMustacheFactory(resourceRoot);
+    public ThymeleafTemplateEngine(TemplateResolver templateResolver){
+        templateEngine = new org.thymeleaf.TemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver);
     }
 
-    /**
-     * Constructs a mustache template engine
-     *
-     * @param mustacheFactory the mustache factory
-     */
-    public MustacheTemplateEngine(MustacheFactory mustacheFactory) {
-        this.mustacheFactory = mustacheFactory;
-    }
+
 
     @Override
+    @SuppressWarnings("unchecked")
     public String render(ModelAndView modelAndView) {
-        String viewName = modelAndView.getViewName();
-        Mustache mustache = mustacheFactory.compile(viewName);
-        StringWriter stringWriter = new StringWriter();
-        try {
-            mustache.execute(stringWriter, modelAndView.getModel()).close();
-        } catch (IOException e) {
-            throw new RuntimeIOException(e);
+
+        Object model = modelAndView.getModel();
+        if (model instanceof Map) {
+            Map<String, ?> modelMap = (Map<String, ?>) model;
+            Context context = new Context();
+            context.setVariables(modelMap);
+            return templateEngine.process(modelAndView.getViewName(), context);
+        } else {
+            throw new IllegalArgumentException("modelAndView must be of type java.util.Map");
         }
-        return stringWriter.toString();
+
     }
 }

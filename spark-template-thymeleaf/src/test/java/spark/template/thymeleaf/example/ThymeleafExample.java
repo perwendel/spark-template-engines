@@ -1,5 +1,4 @@
 /*
- * Copyright 2013 Per Wendel
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -14,30 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package spark.template.velocity.example;
+package spark.template.thymeleaf.example;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import spark.ModelAndView;
-import spark.template.velocity.VelocityTemplateEngine;
+import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import static spark.Spark.get;
 
 /**
- * VelocityTemplateRoute example.
+ * ThymeleafTemplateRoute example.
  */
-public final class VelocityExample {
+public final class ThymeleafExample {
+
     public static void main(final String[] args) {
 
         get("/hello", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("hello", "Velocity World");
+            model.put("hello", "Thymeleaf World");
             model.put("person", new Person("Foobar"));
 
-            // The wm files are located under the resources directory
-            return new ModelAndView(model, "hello.wm");
-        }, new VelocityTemplateEngine());
+            return new ModelAndView(model, "hello");
+        }, new ThymeleafTemplateEngine());
 
     }
 
