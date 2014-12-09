@@ -32,55 +32,50 @@ import com.github.jknack.handlebars.io.TemplateLoader;
 import com.github.jknack.handlebars.io.TemplateSource;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
 
 /**
- * 
  * Renders HTML from Route output using
  * https://github.com/jknack/handlebars.java.
- * 
  * Defaults to the 'templates' directory under the resource path.
- *
  */
 public class HandlebarsTemplateEngine extends TemplateEngine {
 
-	private Handlebars handlebars;
+    private Handlebars handlebars;
 
-	/**
-	 * Constructs a handlebars template engine
-	 */
-	public HandlebarsTemplateEngine() {
-		this("/templates");
-	}
+    /**
+     * Constructs a handlebars template engine
+     */
+    public HandlebarsTemplateEngine() {
+        this("/templates");
+    }
 
-	/**
-	 * Constructs a handlebars template engine
-	 *
-	 * @param resourceRoot
-	 *            the resource root
-	 */
-	public HandlebarsTemplateEngine(String resourceRoot) {
-		TemplateLoader templateLoader = new ClassPathTemplateLoader();
-		templateLoader.setPrefix(resourceRoot);
-		templateLoader.setSuffix(null);
+    /**
+     * Constructs a handlebars template engine
+     *
+     * @param resourceRoot the resource root
+     */
+    public HandlebarsTemplateEngine(String resourceRoot) {
+        TemplateLoader templateLoader = new ClassPathTemplateLoader();
+        templateLoader.setPrefix(resourceRoot);
+        templateLoader.setSuffix(null);
 
-		handlebars = new Handlebars(templateLoader);
+        handlebars = new Handlebars(templateLoader);
 
-		// Set Guava cache.
-		Cache<TemplateSource, Template> cache = CacheBuilder.newBuilder().expireAfterWrite(10, TimeUnit.MINUTES)
-				.maximumSize(1000).build();
+        // Set Guava cache.
+        Cache<TemplateSource, Template> cache = CacheBuilder.newBuilder().expireAfterWrite(10, TimeUnit.MINUTES)
+                .maximumSize(1000).build();
 
-		handlebars = handlebars.with(new GuavaTemplateCache(cache));
-	}
+        handlebars = handlebars.with(new GuavaTemplateCache(cache));
+    }
 
-	@Override
-	public String render(ModelAndView modelAndView) {
-		String viewName = modelAndView.getViewName();
-		try {
-			Template template = handlebars.compile(viewName);
-			return template.apply(modelAndView.getModel());
-		} catch (IOException e) {
-			throw new RuntimeIOException(e);
-		}
-	}
+    @Override
+    public String render(ModelAndView modelAndView) {
+        String viewName = modelAndView.getViewName();
+        try {
+            Template template = handlebars.compile(viewName);
+            return template.apply(modelAndView.getModel());
+        } catch (IOException e) {
+            throw new RuntimeIOException(e);
+        }
+    }
 }
