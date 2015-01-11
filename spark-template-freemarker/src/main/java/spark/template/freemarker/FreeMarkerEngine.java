@@ -16,29 +16,29 @@
  */
 package spark.template.freemarker;
 
+import java.io.IOException;
+import java.io.StringWriter;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import spark.ModelAndView;
 import spark.TemplateEngine;
-import spark.TemplateViewRoute;
-
-import java.io.IOException;
-import java.io.StringWriter;
 
 /**
  * Renders HTML from Route output using FreeMarker.
- * 
  * FreeMarker configuration can be set with the {@link FreeMarkerEngine#setConfiguration(Configuration)}
  * method. If no configuration is set the default configuration will be used where
  * ftl files need to be put in directory spark/template/freemarker under the resources directory.
- * 
+ *
  * @author Alex
  * @author Per Wendel
  */
 public class FreeMarkerEngine extends TemplateEngine {
 
-    /** The FreeMarker configuration */
+    /**
+     * The FreeMarker configuration
+     */
     private Configuration configuration;
 
     /**
@@ -58,7 +58,6 @@ public class FreeMarkerEngine extends TemplateEngine {
     }
 
 
-
     /**
      * {@inheritDoc}
      */
@@ -69,7 +68,7 @@ public class FreeMarkerEngine extends TemplateEngine {
 
             Template template = configuration.getTemplate(modelAndView.getViewName());
             template.process(modelAndView.getModel(), stringWriter);
-            
+
             return stringWriter.toString();
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
@@ -77,12 +76,12 @@ public class FreeMarkerEngine extends TemplateEngine {
             throw new IllegalArgumentException(e);
         }
     }
-    
+
     /**
      * Sets FreeMarker configuration.
      * Note: If configuration is not set the default configuration
      * will be used.
-     * 
+     *
      * @param configuration the configuration to set
      */
     public void setConfiguration(Configuration configuration) {
