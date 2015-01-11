@@ -12,6 +12,7 @@
         <module>spark-template-velocity</module>
         <module>spark-template-mustache</module>
         <module>spark-template-handlebars</module>
+        <module>spark-template-pebble</module>
     </modules>
 
     <build>
