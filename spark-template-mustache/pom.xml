@@ -6,13 +6,14 @@
         <artifactId>oss-parent</artifactId>
         <version>7</version>
     </parent>
+
     <groupId>com.sparkjava</groupId>
     <artifactId>spark-template-mustache</artifactId>
     <packaging>jar</packaging>
     <version>1.0.0</version>
 
     <name>spark-template-mustache</name>
-    <url>http://maven.apache.org</url>
+    <url>http://www.sparkjava.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
