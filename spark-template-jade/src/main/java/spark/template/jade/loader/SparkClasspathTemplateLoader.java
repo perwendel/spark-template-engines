@@ -15,11 +15,11 @@
  */
 package spark.template.jade.loader;
 
-import de.neuland.jade4j.template.ClasspathTemplateLoader;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+
+import de.neuland.jade4j.template.ClasspathTemplateLoader;
 
 /**
  * Load templates from a given directory on the classpath.

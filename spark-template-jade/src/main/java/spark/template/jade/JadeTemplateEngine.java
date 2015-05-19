@@ -15,12 +15,11 @@
  */
 package spark.template.jade;
 
-import de.neuland.jade4j.JadeConfiguration;
-import de.neuland.jade4j.template.JadeTemplate;
-
 import java.io.IOException;
 import java.util.Map;
 
+import de.neuland.jade4j.JadeConfiguration;
+import de.neuland.jade4j.template.JadeTemplate;
 import spark.ModelAndView;
 import spark.TemplateEngine;
 import spark.template.jade.loader.SparkClasspathTemplateLoader;
@@ -59,7 +58,7 @@ public class JadeTemplateEngine extends TemplateEngine {
         try {
             JadeTemplate template = configuration.getTemplate(modelAndView.getViewName());
             return configuration.renderTemplate(template,
-                    (Map<String, Object>) modelAndView.getModel());
+                                                (Map<String, Object>) modelAndView.getModel());
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
         }
