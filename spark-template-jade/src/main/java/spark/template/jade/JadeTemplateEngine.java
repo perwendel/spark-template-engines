@@ -37,7 +37,7 @@ public class JadeTemplateEngine extends TemplateEngine {
      * under the resource path.
      */
     public JadeTemplateEngine() {
-        this("templates/");
+        this("templates");
     }
 
     /**

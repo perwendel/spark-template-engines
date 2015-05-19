@@ -17,6 +17,7 @@ package spark.template.jade.loader;
 
 import de.neuland.jade4j.template.ClasspathTemplateLoader;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 
@@ -33,6 +34,9 @@ public class SparkClasspathLoader extends ClasspathTemplateLoader {
      * @param templateRoot the template root directory
      */
     public SparkClasspathLoader(String templateRoot) {
+        if (!templateRoot.endsWith(File.separator)) {
+            templateRoot += File.separator;
+        }
         this.templateRoot = templateRoot;
     }
 
