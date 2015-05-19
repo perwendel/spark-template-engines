@@ -13,6 +13,6 @@ public class JadeTemplateExample {
         map.put("name", "Godzilla");
 
         // hello.jade file is in resources/templates directory
-        get("/hello", (rq, rs) -> new ModelAndView(map, "hello"), new JadeEngine());
+        get("/hello", (rq, rs) -> new ModelAndView(map, "hello"), new JadeTemplateEngine());
     }
 }
