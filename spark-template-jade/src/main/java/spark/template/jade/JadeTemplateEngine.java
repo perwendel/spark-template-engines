@@ -23,7 +23,7 @@ import java.util.Map;
 
 import spark.ModelAndView;
 import spark.TemplateEngine;
-import spark.template.jade.loader.SparkClasspathLoader;
+import spark.template.jade.loader.SparkClasspathTemplateLoader;
 
 /**
  * Template engine to render HTML from jade templates.
@@ -47,7 +47,7 @@ public class JadeTemplateEngine extends TemplateEngine {
      */
     public JadeTemplateEngine(String templateRoot) {
         configuration = new JadeConfiguration();
-        configuration.setTemplateLoader(new SparkClasspathLoader(templateRoot));
+        configuration.setTemplateLoader(new SparkClasspathTemplateLoader(templateRoot));
     }
 
     /**

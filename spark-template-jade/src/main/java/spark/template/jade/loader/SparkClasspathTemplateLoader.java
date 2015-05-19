@@ -24,7 +24,7 @@ import java.io.Reader;
 /**
  * Load templates from a given directory on the classpath.
  */
-public class SparkClasspathLoader extends ClasspathTemplateLoader {
+public class SparkClasspathTemplateLoader extends ClasspathTemplateLoader {
 
     private String templateRoot;
 
@@ -33,7 +33,7 @@ public class SparkClasspathLoader extends ClasspathTemplateLoader {
      *
      * @param templateRoot the template root directory
      */
-    public SparkClasspathLoader(String templateRoot) {
+    public SparkClasspathTemplateLoader(String templateRoot) {
         if (!templateRoot.endsWith(File.separator)) {
             templateRoot += File.separator;
         }
