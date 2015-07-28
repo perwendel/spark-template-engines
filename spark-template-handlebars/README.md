@@ -14,7 +14,7 @@ import static spark.Spark.get;
 /**
  * Handlebars template engine example
  */
-public class MustacheTemplateExample {
+public class HandlebarsTemplateExample {
     public static void main(String[] args) {
         Map map = new HashMap();
         map.put("name", "Sam");
