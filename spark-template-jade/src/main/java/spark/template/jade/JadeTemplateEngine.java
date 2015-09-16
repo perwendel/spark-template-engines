@@ -50,6 +50,24 @@ public class JadeTemplateEngine extends TemplateEngine {
     }
 
     /**
+     * Construct a jade template engine from a raw JadeConfiguration
+     *
+     * @param configuration the raw JadeConfiguration to use
+     */
+    public JadeTemplateEngine(JadeConfiguration configuration) {
+        this.configuration = configuration;
+    }
+
+    /**
+     * Access to the internal JadeConfiguration
+     *
+     * @return The JadeConfiguration used by this engine
+     */
+    public JadeConfiguration configuration() {
+        return configuration;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
