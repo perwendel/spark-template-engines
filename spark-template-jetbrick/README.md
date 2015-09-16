@@ -4,12 +4,13 @@ spark-template-jetbrick
 How to use the Jetbrick-Template route for Spark example:
 
 ```java
-import static spark.Spark.get;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import spark.ModelAndView;
+import spark.template.jetbrick.JetbrickTemplateEngine;
+
+import static spark.Spark.get;
 
 /**
  * spark-template-jetbrick example
@@ -24,7 +25,7 @@ public class JetbrickTemplateExample {
             model.put("target", "spark-template-jetbrick");
 
             return new ModelAndView(model, "template/hello.jetx");
-        }, new JetTemplateEngine());
+        }, new JetbrickTemplateEngine());
 		
 	}
 
