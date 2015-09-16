@@ -4,7 +4,7 @@
 	<groupId>com.sparkjava</groupId>
 	<artifactId>spark-template-jetbrick</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	
 	<name>spark-template-jetbrick</name>
 	<url>http://maven.apache.org</url>
