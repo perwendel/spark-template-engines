@@ -26,7 +26,7 @@ public final class VelocityExample {
             model.put("person", new Person("Foobar"));
 
             // The wm files are located under the resources directory
-            return new ModelAndView(model, "hello.wm");
+            return new ModelAndView(model, "hello.vm");
         }, new VelocityTemplateEngine());
 
     }
