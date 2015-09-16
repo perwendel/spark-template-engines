@@ -16,6 +16,7 @@
         <module>spark-template-pebble</module>
         <module>spark-template-jade</module>
         <module>spark-template-jetbrick</module>
+        <module>spark-template-thymeleaf</module>
     </modules>
 
     <build>
