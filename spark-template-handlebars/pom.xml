@@ -9,7 +9,7 @@
     <groupId>com.sparkjava</groupId>
     <artifactId>spark-template-handlebars</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>2.3</version>
 
     <name>spark-template-handlebars</name>
     <url>http://www.sparkjava.com</url>
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-core</artifactId>
-            <version>2.2</version>
+            <version>2.3</version>
         </dependency>
         <dependency>
             <groupId>com.github.jknack</groupId>
