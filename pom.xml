@@ -15,6 +15,7 @@
         <module>spark-template-water</module>
         <module>spark-template-pebble</module>
         <module>spark-template-jade</module>
+        <module>spark-template-jetbrick</module>
     </modules>
 
     <build>
