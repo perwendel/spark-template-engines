@@ -32,6 +32,11 @@ import spark.TemplateEngine;
  */
 public class ThymeleafTemplateEngine extends TemplateEngine {
 
+    public static final String DEFAULT_PREFIX = "templates/";
+    public static final String DEFAULT_SUFFIX = ".html";
+    public static final String DEFAULT_TEMPLATE_MODE = "XHTML";
+    public static final long DEFAULT_CACHE_TTL_MS = 3600000L;
+
     private org.thymeleaf.TemplateEngine templateEngine;
 
     /**
@@ -39,7 +44,7 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
      * Defaults prefix (template directory in resource path) to templates/ and suffix to .html
      */
     public ThymeleafTemplateEngine() {
-        this("templates/", ".html");
+        this(DEFAULT_PREFIX, DEFAULT_SUFFIX);
     }
 
     /**
@@ -49,23 +54,7 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
      * @param suffix the suffix (e.g. .html)
      */
     public ThymeleafTemplateEngine(String prefix, String suffix) {
-        TemplateResolver defaultTemplateResolver = new TemplateResolver();
-        defaultTemplateResolver.setTemplateMode("XHTML");
-
-        if (prefix != null) {
-            defaultTemplateResolver.setPrefix(prefix);
-        } else {
-            defaultTemplateResolver.setPrefix("templates/");
-        }
-
-        if (suffix != null) {
-            defaultTemplateResolver.setSuffix(suffix);
-        } else {
-            defaultTemplateResolver.setSuffix(".html");
-        }
-
-        defaultTemplateResolver.setCacheTTLMs(3600000L);
-        defaultTemplateResolver.setResourceResolver(new ClassLoaderResourceResolver());
+        TemplateResolver defaultTemplateResolver = createDefaultTemplateResolver(prefix, suffix);
 
         initialize(defaultTemplateResolver);
     }
@@ -100,6 +89,26 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
         } else {
             throw new IllegalArgumentException("modelAndView.getModel() must return a java.util.Map");
         }
+    }
 
+    private static TemplateResolver createDefaultTemplateResolver(String prefix, String suffix) {
+        TemplateResolver defaultTemplateResolver = new TemplateResolver();
+        defaultTemplateResolver.setTemplateMode(DEFAULT_TEMPLATE_MODE);
+
+        if (prefix != null) {
+            defaultTemplateResolver.setPrefix(prefix);
+        } else {
+            defaultTemplateResolver.setPrefix(DEFAULT_PREFIX);
+        }
+
+        if (suffix != null) {
+            defaultTemplateResolver.setSuffix(suffix);
+        } else {
+            defaultTemplateResolver.setSuffix(DEFAULT_SUFFIX);
+        }
+
+        defaultTemplateResolver.setCacheTTLMs(DEFAULT_CACHE_TTL_MS);
+        defaultTemplateResolver.setResourceResolver(new ClassLoaderResourceResolver());
+        return defaultTemplateResolver;
     }
 }
