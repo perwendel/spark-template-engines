@@ -32,10 +32,10 @@ import spark.TemplateEngine;
  */
 public class ThymeleafTemplateEngine extends TemplateEngine {
 
-    public static final String DEFAULT_PREFIX = "templates/";
-    public static final String DEFAULT_SUFFIX = ".html";
-    public static final String DEFAULT_TEMPLATE_MODE = "XHTML";
-    public static final long DEFAULT_CACHE_TTL_MS = 3600000L;
+    private static final String DEFAULT_PREFIX = "templates/";
+    private static final String DEFAULT_SUFFIX = ".html";
+    private static final String DEFAULT_TEMPLATE_MODE = "XHTML";
+    private static final long DEFAULT_CACHE_TTL_MS = 3600000L;
 
     private org.thymeleaf.TemplateEngine templateEngine;
 
