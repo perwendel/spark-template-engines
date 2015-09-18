@@ -26,42 +26,54 @@ import spark.ModelAndView;
 import spark.TemplateEngine;
 
 /**
- * Defaults to the 'templates' directory under the resource path.
+ * Defaults to the 'templates' directory under the resource path
  *
  * @author David Vaillant https://github.com/dvaillant
  */
 public class ThymeleafTemplateEngine extends TemplateEngine {
 
+    private static final String DEFAULT_PREFIX = "templates/";
+    private static final String DEFAULT_SUFFIX = ".html";
+    private static final String DEFAULT_TEMPLATE_MODE = "XHTML";
+    private static final long DEFAULT_CACHE_TTL_MS = 3600000L;
+
     private org.thymeleaf.TemplateEngine templateEngine;
 
     /**
-     * Constructs a default thymeleaf template engine
+     * Constructs a default thymeleaf template engine.
+     * Defaults prefix (template directory in resource path) to templates/ and suffix to .html
      */
     public ThymeleafTemplateEngine() {
-
-        TemplateResolver defaultTemplateResolver =
-                new TemplateResolver();
-        defaultTemplateResolver.setTemplateMode("XHTML");
-        defaultTemplateResolver.setPrefix("templates/");
-        defaultTemplateResolver.setSuffix(".html");
-        defaultTemplateResolver.setCacheTTLMs(3600000L);
-
-        defaultTemplateResolver.setResourceResolver(new ClassLoaderResourceResolver());
-
-        templateEngine = new org.thymeleaf.TemplateEngine();
-        templateEngine.setTemplateResolver(defaultTemplateResolver);
+        this(DEFAULT_PREFIX, DEFAULT_SUFFIX);
     }
 
     /**
-     * Constructs a thymeleaf template engine
+     * Constructs a thymeleaf template engine with specified prefix and suffix
      *
-     * @param templateResolver
+     * @param prefix the prefix (template directory in resource path)
+     * @param suffix the suffix (e.g. .html)
+     */
+    public ThymeleafTemplateEngine(String prefix, String suffix) {
+        TemplateResolver defaultTemplateResolver = createDefaultTemplateResolver(prefix, suffix);
+        initialize(defaultTemplateResolver);
+    }
+
+    /**
+     * Constructs a thymeleaf template engine with a proprietary initialize
+     *
+     * @param templateResolver the template resolver.
      */
     public ThymeleafTemplateEngine(TemplateResolver templateResolver) {
+        initialize(templateResolver);
+    }
+
+    /**
+     * Initializes and sets the template resolver
+     */
+    private void initialize(TemplateResolver templateResolver) {
         templateEngine = new org.thymeleaf.TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
     }
-
 
     @Override
     @SuppressWarnings("unchecked")
@@ -76,6 +88,22 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
         } else {
             throw new IllegalArgumentException("modelAndView.getModel() must return a java.util.Map");
         }
+    }
 
+    private static TemplateResolver createDefaultTemplateResolver(String prefix, String suffix) {
+        TemplateResolver defaultTemplateResolver = new TemplateResolver();
+        defaultTemplateResolver.setTemplateMode(DEFAULT_TEMPLATE_MODE);
+
+        defaultTemplateResolver.setPrefix(
+                prefix != null ? prefix : DEFAULT_PREFIX
+        );
+
+        defaultTemplateResolver.setSuffix(
+                suffix != null ? suffix : DEFAULT_SUFFIX
+        );
+
+        defaultTemplateResolver.setCacheTTLMs(DEFAULT_CACHE_TTL_MS);
+        defaultTemplateResolver.setResourceResolver(new ClassLoaderResourceResolver());
+        return defaultTemplateResolver;
     }
 }
