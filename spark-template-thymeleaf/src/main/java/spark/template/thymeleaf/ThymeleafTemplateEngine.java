@@ -55,7 +55,6 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
      */
     public ThymeleafTemplateEngine(String prefix, String suffix) {
         TemplateResolver defaultTemplateResolver = createDefaultTemplateResolver(prefix, suffix);
-
         initialize(defaultTemplateResolver);
     }
 
@@ -71,7 +70,7 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
     /**
      * Initializes and sets the template resolver
      */
-    private final void initialize(TemplateResolver templateResolver) {
+    private void initialize(TemplateResolver templateResolver) {
         templateEngine = new org.thymeleaf.TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
     }
@@ -95,17 +94,13 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
         TemplateResolver defaultTemplateResolver = new TemplateResolver();
         defaultTemplateResolver.setTemplateMode(DEFAULT_TEMPLATE_MODE);
 
-        if (prefix != null) {
-            defaultTemplateResolver.setPrefix(prefix);
-        } else {
-            defaultTemplateResolver.setPrefix(DEFAULT_PREFIX);
-        }
+        defaultTemplateResolver.setPrefix(
+                prefix != null ? prefix : DEFAULT_PREFIX
+        );
 
-        if (suffix != null) {
-            defaultTemplateResolver.setSuffix(suffix);
-        } else {
-            defaultTemplateResolver.setSuffix(DEFAULT_SUFFIX);
-        }
+        defaultTemplateResolver.setSuffix(
+                suffix != null ? suffix : DEFAULT_SUFFIX
+        );
 
         defaultTemplateResolver.setCacheTTLMs(DEFAULT_CACHE_TTL_MS);
         defaultTemplateResolver.setResourceResolver(new ClassLoaderResourceResolver());
