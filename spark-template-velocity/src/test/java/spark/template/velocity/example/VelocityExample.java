@@ -16,10 +16,13 @@
  */
 package spark.template.velocity.example;
 
-import spark.*;
-import spark.template.velocity.*;
-import java.util.*;
-import static spark.Spark.*;
+import java.util.HashMap;
+import java.util.Map;
+
+import spark.ModelAndView;
+import spark.template.velocity.VelocityTemplateEngine;
+
+import static spark.Spark.get;
 
 /**
  * VelocityTemplateRoute example.
