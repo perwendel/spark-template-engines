@@ -16,13 +16,10 @@
  */
 package spark.template.velocity.example;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import spark.ModelAndView;
-import spark.template.velocity.VelocityTemplateEngine;
-
-import static spark.Spark.get;
+import spark.*;
+import spark.template.velocity.*;
+import java.util.*;
+import static spark.Spark.*;
 
 /**
  * VelocityTemplateRoute example.
@@ -35,8 +32,8 @@ public final class VelocityExample {
             model.put("hello", "Velocity World");
             model.put("person", new Person("Foobar"));
 
-            // The wm files are located under the resources directory
-            return new ModelAndView(model, "hello.wm");
+            // The vm files are located under the resources directory
+            return new ModelAndView(model, "hello.vm");
         }, new VelocityTemplateEngine());
 
     }
