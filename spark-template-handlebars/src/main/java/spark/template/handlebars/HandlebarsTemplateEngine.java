@@ -40,7 +40,7 @@ import com.google.common.cache.CacheBuilder;
  */
 public class HandlebarsTemplateEngine extends TemplateEngine {
 
-    private Handlebars handlebars;
+    protected Handlebars handlebars;
 
     /**
      * Constructs a handlebars template engine
