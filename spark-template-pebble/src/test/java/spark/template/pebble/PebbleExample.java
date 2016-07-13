@@ -16,7 +16,7 @@ public class PebbleExample {
 		get("/hello", (request, response) -> {
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("message", "Hello World!");
-
+			
 			// The hello.pebble file is located in directory:
 			// src/test/resources/spark/template/pebble
 			return new ModelAndView(attributes, "templates/hello.pebble");
