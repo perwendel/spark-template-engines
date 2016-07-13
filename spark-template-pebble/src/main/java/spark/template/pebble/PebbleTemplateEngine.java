@@ -44,16 +44,14 @@ public class PebbleTemplateEngine extends TemplateEngine {
 	 * Construct a new template engine using pebble with a default engine.
 	 */
 	public PebbleTemplateEngine() {
-		Loader loader = new ClasspathLoader();
-		loader.setPrefix("");
-		this.engine = new PebbleEngine(loader);
+		this.engine = new PebbleEngine.Builder().build();
 	}
 
 	/**
 	 * Construct a new template engine using pebble with an engine using a special loader.
 	 */
 	public PebbleTemplateEngine(Loader loader) {
-		this.engine = new PebbleEngine(loader);
+		this.engine = new PebbleEngine.Builder().loader(loader).build();
 	}
 
 	/**
