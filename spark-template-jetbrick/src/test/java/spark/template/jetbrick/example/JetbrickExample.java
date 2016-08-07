@@ -1,5 +1,5 @@
 /*
- * Copyright 2014
+ * Copyright 2015 - Per Wendel
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -14,26 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package spark.template.mustache;
+package spark.template.jetbrick.example;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import spark.ModelAndView;
+import spark.template.jetbrick.JetbrickTemplateEngine;
 
 import static spark.Spark.get;
 
-/**
- * Mustache template engine example
- *
- * @author Sam Pullara https://github.com/spullara
- */
-public class MustacheTemplateExample {
-    public static void main(String[] args) {
-        Map map = new HashMap();
-        map.put("name", "Sam");
+public class JetbrickExample {
 
-        // hello.mustache file is in resources/templates directory
-        get("/hello", (rq, rs) -> new ModelAndView(map, "hello.mustache"), new MustacheTemplateEngine());
+    public static void main(String[] args) {
+
+        get("/", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("message", "Hello from Jetbrick!");
+
+            return new ModelAndView(model, "hello.jetx");
+        }, new JetbrickTemplateEngine());
+
     }
+
 }
