@@ -1,16 +1,14 @@
 package spark.template.handlebars;
 
-import java.io.IOException;
-
-import org.eclipse.jetty.io.RuntimeIOException;
-
-import spark.ModelAndView;
-import spark.TemplateEngine;
-
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.io.ClassPathTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateLoader;
+import org.eclipse.jetty.io.RuntimeIOException;
+import spark.ModelAndView;
+import spark.TemplateEngine;
+
+import java.io.IOException;
 
 /**
  * Renders HTML from Route output using Handlebars.
@@ -45,7 +43,7 @@ public class HandlebarsTemplateEngine extends TemplateEngine {
     }
 
     /**
-     * Constructs the FreeMarkerEngine with a {@link TemplateLoader}
+     * Constructs the Handlebars with a {@link TemplateLoader}
      *
      * @param templateLoader a template loader
      */

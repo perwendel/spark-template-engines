@@ -1,17 +1,17 @@
 package spark.template.jetbrick;
 
-import java.io.StringWriter;
-import java.util.Map;
-import java.util.Properties;
-
 import jetbrick.template.JetContext;
 import jetbrick.template.JetEngine;
 import jetbrick.template.JetTemplate;
 import spark.ModelAndView;
 import spark.TemplateEngine;
 
+import java.io.StringWriter;
+import java.util.Map;
+import java.util.Properties;
+
 /**
- * Renders HTML from Route output using FreeMarker.
+ * Renders HTML from Route output using Jetbrick.
  * Jetbrick {@link Properties} can be set with the {@link JetbrickTemplateEngine(Properties, String)}
  * constructor. If no {@link Properties} or resource root is set, the default path for the template files
  * will be in templates under the resources directory.
@@ -36,7 +36,7 @@ public class JetbrickTemplateEngine extends TemplateEngine {
     }
 
     /**
-     * Constructs the FreeMarkerEngine with resource root
+     * Constructs the JetbrickTempleEngine with resource root
      *
      * @param templateRoot the root of resources
      */
@@ -45,7 +45,7 @@ public class JetbrickTemplateEngine extends TemplateEngine {
     }
 
     /**
-     * Constructs a JetBrick template engine.
+     * Constructs a JetBrickTemplate engine.
      *
      * @param properties  The {@link Properties} for the JetEngine
      * @param templateRoot The root path for the templates

@@ -1,4 +1,4 @@
-Spark Templating Engines
+Spark Template Engines
 ========================
 
 Repository for different Template engine implementations. 
@@ -7,7 +7,7 @@ Repository for different Template engine implementations.
 
 Please follow the official Spark [style guidelines](https://github.com/perwendel/spark/tree/master/config) if you want to contribute.
 
-## Current Templating Engines that are supported by Spark
+## Current Template Engines that are supported by Spark
 
 Freemarker
 Handlebars
