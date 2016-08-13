@@ -1,41 +1,43 @@
 package spark.template.water;
 
+import java.util.Map;
+
 import org.watertemplate.Template;
-import spark.Request;
-import spark.ResponseTransformer;
 
-import java.util.Locale;
+import spark.ModelAndView;
+import spark.TemplateEngine;
 
-public class WaterTemplateEngine implements ResponseTransformer {
+public class WaterTemplateEngine extends TemplateEngine {
 
-    private static final WaterTemplateEngine waterTemplateEngine = new WaterTemplateEngine();
+    private String templateRoot;
 
+    public WaterTemplateEngine() {
+        this("");
+    }
+
+    public WaterTemplateEngine(String templateRoot) {
+        this.templateRoot = templateRoot;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public String render(final Object o) throws Exception {
-        return ((Render) o).render();
-    }
-
-    public static Render render(final Template template, final Request request) {
-        return new Render(template, request.raw().getLocale());
-    }
-
-    public static WaterTemplateEngine waterEngine() {
-        return waterTemplateEngine;
-    }
-
-    //
-
-    private static class Render {
-        private final Locale locale;
-        private final Template template;
-
-        public Render(final Template template, final Locale locale) {
-            this.template = template;
-            this.locale = locale;
+    public String render(ModelAndView modelAndView) {
+        Template template = new Template() {
+            {
+                Map<String, Object> model = (Map<String, Object>) modelAndView.getModel();
+                for (Map.Entry e : model.entrySet()) {
+                    add((String) e.getKey(), (String) e.getValue());
+                }
         }
 
-        public String render() {
-            return template.render(locale);
-        }
+            @Override
+            protected String getFilePath() {
+                return templateRoot + modelAndView.getViewName();
+            }
+        };
+        return template.render();
     }
+
 }

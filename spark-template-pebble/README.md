@@ -1,31 +1,28 @@
-spark-template-pebble
-==============================================
+Pebble - Spark Template Engine
+==============================
 
 How to use the Pebble template route for Spark example:
 
 ```java
-import spark.ModelAndView;
-import spark.template.pebble.PebbleTemplateEngine;
-
 import java.util.HashMap;
 import java.util.Map;
 
+import spark.ModelAndView;
+
 import static spark.Spark.get;
 
-/**
- * @author Nikki
- */
 public class PebbleExample {
 
-	public static void main(String[] args) {
-		get("/hello", (request, response) -> {
-			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("message", "Hello World!");
+    public static void main(String[] args) {
 
-			// The hello.pebble file is located in directory:
-			// src/test/resources/spark/template/pebble
-			return new ModelAndView(attributes, "hello.pebble");
-		}, new PebbleTemplateEngine());
-	}
+        get("/", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("message", "Hello from Pebble!");
+
+            return new ModelAndView(model, "hello.pebble");
+        }, new PebbleTemplateEngine());
+
+    }
+
 }
 ```

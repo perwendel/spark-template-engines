@@ -1,19 +1,3 @@
-/*
- * Copyright 2014
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package spark.template.mustache;
 
 import java.io.IOException;
@@ -29,19 +13,23 @@ import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
 
 /**
- * Defaults to the 'templates' directory under the resource path.
- *
- * @author Sam Pullara https://github.com/spullara
+ * Renders HTML from Route output using Mustache.
+ * Mustache {@link MustacheFactory} can be set with the {@link MustacheTemplateEngine(MustacheFactory)}
+ * constructor. If no {@link MustacheFactory} or resource root is set, the default path for the template files
+ * will be in templates under the resources directory.
  */
 public class MustacheTemplateEngine extends TemplateEngine {
 
+    /**
+     * The {@link MustacheFactory} instance
+     */
     private MustacheFactory mustacheFactory;
 
     /**
      * Constructs a mustache template engine
      */
     public MustacheTemplateEngine() {
-        mustacheFactory = new DefaultMustacheFactory("templates");
+        this("/templates");
     }
 
     /**
@@ -50,6 +38,9 @@ public class MustacheTemplateEngine extends TemplateEngine {
      * @param resourceRoot the resource root
      */
     public MustacheTemplateEngine(String resourceRoot) {
+        if (resourceRoot.startsWith("/")) {
+            resourceRoot = resourceRoot.substring(1);
+        }
         mustacheFactory = new DefaultMustacheFactory(resourceRoot);
     }
 
@@ -62,6 +53,9 @@ public class MustacheTemplateEngine extends TemplateEngine {
         this.mustacheFactory = mustacheFactory;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String render(ModelAndView modelAndView) {
         String viewName = modelAndView.getViewName();
@@ -74,4 +68,5 @@ public class MustacheTemplateEngine extends TemplateEngine {
         }
         return stringWriter.toString();
     }
+
 }

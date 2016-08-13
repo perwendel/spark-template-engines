@@ -1,28 +1,29 @@
-spark-template-water
-=======================
+Water - Spark Template Engine
+==============================================
 
-Spark templating system using [Water](http://watertemplate.org) template engine.
-
-### How to use
+How to use the Water Template Engine for Spark:
 
 ```java
-import static spark.template.water.WaterTemplateEngine.render;
-import static spark.template.water.WaterTemplateEngine.waterEngine;
+import java.util.HashMap;
+import java.util.Map;
 
-public class WaterTemplateEngineTest {
+import spark.ModelAndView;
+import spark.template.water.WaterTemplateEngine;
+
+import static spark.Spark.get;
+
+public class WaterExample {
+
     public static void main(String[] args) {
-        get("/home", (req, res) -> {
-            return render(new HelloPage(), req);
-        }, waterEngine());
+
+        get("/", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("message", "Hello from Water!");
+
+            return new ModelAndView(model, "hello.water");
+        }, new WaterTemplateEngine());
+
     }
-}
 
-//
-
-public class HelloPage extends Template {
-    public HelloPage() { add("water", "Water"); }
-
-    @Override
-    protected String getFilePath() { return "hello.water"; }
 }
 ```

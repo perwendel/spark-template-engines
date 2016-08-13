@@ -4,22 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 import spark.ModelAndView;
-import spark.template.freemarker.FreeMarkerEngine;
+import spark.template.freemarker.FreeMarkerTemplateEngine;
 
 import static spark.Spark.get;
 
 public class FreeMarkerExample {
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
-        get("/hello", (request, response) -> {
-            Map<String, Object> attributes = new HashMap<>();
-            attributes.put("message", "Hello World!");
+        get("/", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("message", "Hello from FreeMarker!");
 
-            // The hello.ftl file is located in directory:
-            // src/test/resources/spark/template/freemarker
-            return new ModelAndView(attributes, "hello.ftl");
-        }, new FreeMarkerEngine());
+            return new ModelAndView(model, "hello.ftl");
+        }, new FreeMarkerTemplateEngine());
 
     }
 

@@ -1,25 +1,27 @@
-spark-template-jinjava
-======================
+Jinjava - Spark Template Engine
+===============================
 
 How to use the Jinjava template route for Spark example:
 
 ```java
-import spark.ModelAndView;
-import spark.template.pebble.PebbleTemplateEngine;
-
 import java.util.HashMap;
 import java.util.Map;
 
+import spark.ModelAndView;
+
 import static spark.Spark.get;
 
-public class PebbleExample {
+public class JinjavaExample {
 
-	public static void main(String[] args) {
-		get("/hello", (request, response) -> {
-			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("message", "spark-template-jinjava");
-			return new ModelAndView(attributes, "template\hello.jin");
-		}, new JinjavaTemplateEngine());
-	}
+    public static void main(String[] args) {
+        get("/", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("message", "Hello from Jinjava!");
+
+            return new ModelAndView(model, "hello.jin");
+        }, new JinjavaTemplateEngine());
+
+    }
+
 }
 ```

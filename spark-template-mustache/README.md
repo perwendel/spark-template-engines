@@ -1,27 +1,28 @@
-spark-template-mustache
-=======================
+Mustache - Spark Template Engine
+================================
 
-Spark templating system using mustache.java
+How to use the Mustache Template Engine for Spark:
 
 ```java
 import java.util.HashMap;
 import java.util.Map;
 
 import spark.ModelAndView;
-import spark.template.mustache.MustacheTemplateEngine;
 
 import static spark.Spark.get;
 
-/**
- * Mustache template engine example
- */
-public class MustacheTemplateExample {
-    public static void main(String[] args) {
-        Map map = new HashMap();
-        map.put("name", "Sam");
+public class MustacheExample {
 
-        // hello.mustache file is in resources/templates directory
-        get("/hello", (rq, rs) -> new ModelAndView(map, "hello.mustache"), new MustacheTemplateEngine());
+    public static void main(String[] args) {
+
+        get("/", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("message", "Hello from Mustache!");
+
+            return new ModelAndView(model, "hello.mustache");
+        }, new MustacheTemplateEngine());
+
     }
+
 }
 ```

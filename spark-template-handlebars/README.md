@@ -1,26 +1,29 @@
-spark-template-handlebars
-=======================
+Handlebars - Spark Template Engine
+==================================
 
-Spark templating system using handlebars.java
+How to use the Handlebars Template Engine for Spark:
 
 ```java
 import java.util.HashMap;
 import java.util.Map;
 
 import spark.ModelAndView;
+import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import static spark.Spark.get;
 
-/**
- * Handlebars template engine example
- */
-public class HandlebarsTemplateExample {
-    public static void main(String[] args) {
-        Map map = new HashMap();
-        map.put("name", "Sam");
+public class HandlebarsExample {
 
-        // hello.hbs file is in resources/templates directory
-        get("/hello", (rq, rs) -> new ModelAndView(map, "hello.hbs"), new HandlebarsTemplateEngine());
+    public static void main(String[] args) {
+
+        get("/", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("message", "Hello from Handlebars!");
+
+            return new ModelAndView(model, "hello.hbs");
+        }, new HandlebarsTemplateEngine());
+
     }
+
 }
 ```

@@ -1,23 +1,4 @@
-/*
- * Copyright 2015 - Per Wendel
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package spark.template.jetbrick;
-
-import java.io.StringWriter;
-import java.util.Map;
 
 import jetbrick.template.JetContext;
 import jetbrick.template.JetEngine;
@@ -25,33 +6,61 @@ import jetbrick.template.JetTemplate;
 import spark.ModelAndView;
 import spark.TemplateEngine;
 
+import java.io.StringWriter;
+import java.util.Map;
+import java.util.Properties;
+
 /**
- * JetTemplateEngine  based on Jetbrick-template
- * See https://github.com/subchen/jetbrick-template-2x
+ * Renders HTML from Route output using Jetbrick.
+ * Jetbrick {@link Properties} can be set with the {@link JetbrickTemplateEngine(Properties, String)}
+ * constructor. If no {@link Properties} or resource root is set, the default path for the template files
+ * will be in templates under the resources directory.
  */
 public class JetbrickTemplateEngine extends TemplateEngine {
 
-    private JetEngine jetEngine;
+    /**
+     * The Jetbrick {@link JetEngine} instance
+     */
+    private final JetEngine jetEngine;
 
+    /**
+     * The root path for the templates
+     */
+    private final String templateRoot;
+
+    /**
+     * Constructs the JetbrickTemplateEngine
+     */
     public JetbrickTemplateEngine() {
-        jetEngine = JetEngine.create();
+        this("/templates");
     }
 
     /**
-     * Constructs a JetBrick template engine.
+     * Constructs the JetbrickTempleEngine with resource root
      *
-     * @param jetEngine the JetEngine
+     * @param templateRoot the root of resources
      */
-    public JetbrickTemplateEngine(JetEngine jetEngine) {
-        if (null == jetEngine) {
-            throw new IllegalArgumentException("jetEngine must not be null");
-        }
-        this.jetEngine = jetEngine;
+    public JetbrickTemplateEngine(String templateRoot) {
+        this(new Properties(), templateRoot);
     }
 
+    /**
+     * Constructs a JetBrickTemplate engine.
+     *
+     * @param properties  The {@link Properties} for the JetEngine
+     * @param templateRoot The root path for the templates
+     */
+    public JetbrickTemplateEngine(Properties properties, String templateRoot) {
+        this.jetEngine = JetEngine.create(properties);
+        this.templateRoot = templateRoot;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String render(ModelAndView modelAndView) {
-        JetTemplate template = jetEngine.getTemplate(modelAndView.getViewName());
+        JetTemplate template = jetEngine.getTemplate(templateRoot + "/" + modelAndView.getViewName());
         Object model = modelAndView.getModel();
         if (model instanceof Map) {
             Map<String, Object> modelMap = (Map<String, Object>) model;
@@ -61,7 +70,7 @@ public class JetbrickTemplateEngine extends TemplateEngine {
             template.render(context, writer);
             return writer.toString();
         } else {
-            throw new IllegalArgumentException("modelAndView.getModel() must return a java.util.Map");
+            throw new IllegalArgumentException("Model must be an instance of java.util.Map");
         }
     }
 

@@ -1,26 +1,29 @@
-spark-template-thymeleaf
-=======================
+Thymeleaf - Spark Template Engine
+==============================
 
-Spark templating system using thymeleaf
+How to use the Thymeleaf template route for Spark:
 
 ```java
 import java.util.HashMap;
 import java.util.Map;
 
 import spark.ModelAndView;
+import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import static spark.Spark.get;
 
-/**
- * Thymeleaf template engine example
- */
-public class ThymeleafTemplateExample {
-    public static void main(String[] args) {
-        Map map = new HashMap();
-        map.put("name", "Sam");
+public class ThymeleafExample {
 
-        // hello.html file is in resources/templates directory
-        get("/hello", (rq, rs) -> new ModelAndView(map, "hello"), new ThymeleafTemplateEngine());
+    public static void main(final String[] args) {
+
+        get("/", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("message", "Hello from Thymeleaf!");
+
+            return new ModelAndView(model, "hello.html");
+        }, new ThymeleafTemplateEngine());
+
     }
+
 }
 ```

@@ -1,56 +1,43 @@
-/*
- * Copyright 2015 - Per Wendel
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package spark.template.pebble;
-
-import com.mitchellbosecke.pebble.PebbleEngine;
-import com.mitchellbosecke.pebble.error.PebbleException;
-import com.mitchellbosecke.pebble.loader.ClasspathLoader;
-import com.mitchellbosecke.pebble.loader.Loader;
-import com.mitchellbosecke.pebble.template.PebbleTemplate;
-import spark.ModelAndView;
-import spark.TemplateEngine;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Map;
 
-/**
- * Template Engine based on Pebble.
- *
- * @author Nikki
- */
+import spark.ModelAndView;
+import spark.TemplateEngine;
+
+import com.mitchellbosecke.pebble.PebbleEngine;
+import com.mitchellbosecke.pebble.error.PebbleException;
+import com.mitchellbosecke.pebble.loader.Loader;
+import com.mitchellbosecke.pebble.template.PebbleTemplate;
+
 public class PebbleTemplateEngine extends TemplateEngine {
 
 	/**
-	 * The Pebble Engine instance.
-	 */
-	private final PebbleEngine engine;
+     * The {@link PebbleEngine} instance.
+     */
+    private final PebbleEngine engine;
+    private String templateRoot = "/templates";
 
 	/**
 	 * Construct a new template engine using pebble with a default engine.
 	 */
 	public PebbleTemplateEngine() {
-		this.engine = new PebbleEngine.Builder().build();
-	}
+        this("./templates/");
+    }
+
+    public PebbleTemplateEngine(String templateRoot) {
+        this.templateRoot = templateRoot;
+        this.engine = new PebbleEngine.Builder().build();
+    }
 
 	/**
 	 * Construct a new template engine using pebble with an engine using a special loader.
-	 */
-	public PebbleTemplateEngine(Loader loader) {
+     *
+     * @param loader The {@link PebbleEngine} {@link Loader}
+     */
+    public PebbleTemplateEngine(Loader loader) {
 		this.engine = new PebbleEngine.Builder().loader(loader).build();
 	}
 
@@ -75,9 +62,9 @@ public class PebbleTemplateEngine extends TemplateEngine {
 			try {
 				StringWriter writer = new StringWriter();
 
-				PebbleTemplate template = engine.getTemplate(modelAndView.getViewName());
-				if (model == null) {
-					template.evaluate(writer);
+                PebbleTemplate template = engine.getTemplate(templateRoot + modelAndView.getViewName());
+                if (model == null) {
+                    template.evaluate(writer);
 				} else {
 					template.evaluate(writer, (Map<String, Object>) modelAndView.getModel());
 				}

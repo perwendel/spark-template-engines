@@ -1,19 +1,3 @@
-/*
- * Copyright 2015 - Per Wendel
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *  
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package spark.template.thymeleaf.example;
 
 import java.util.HashMap;
@@ -24,37 +8,17 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import static spark.Spark.get;
 
-/**
- * ThymeleafTemplateRoute example.
- */
-public final class ThymeleafExample {
+public class ThymeleafExample {
 
     public static void main(final String[] args) {
 
-        get("/hello", (request, response) -> {
+        get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("hello", "Thymeleaf World");
-            model.put("person", new Person("Foobar"));
+            model.put("message", "Hello from Thymeleaf!");
 
-            return new ModelAndView(model, "hello");
+            return new ModelAndView(model, "hello.html");
         }, new ThymeleafTemplateEngine());
 
-    }
-
-    public static class Person {
-        private String name;
-
-        public Person(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
     }
 
 }
