@@ -74,7 +74,6 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
      */
     private void initialize(ITemplateResolver templateResolver) {
         templateEngine = new org.thymeleaf.TemplateEngine();
-        templateEngine.setLinkBuilder(new SparkLinkBuilder());
         templateEngine.setTemplateResolver(templateResolver);
     }
 
