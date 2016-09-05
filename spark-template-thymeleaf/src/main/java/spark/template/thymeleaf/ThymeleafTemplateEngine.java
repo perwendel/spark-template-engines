@@ -19,8 +19,9 @@ package spark.template.thymeleaf;
 import java.util.Map;
 
 import org.thymeleaf.context.Context;
-import org.thymeleaf.resourceresolver.ClassLoaderResourceResolver;
-import org.thymeleaf.templateresolver.TemplateResolver;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import spark.ModelAndView;
 import spark.TemplateEngine;
@@ -29,6 +30,7 @@ import spark.TemplateEngine;
  * Defaults to the 'templates' directory under the resource path
  *
  * @author David Vaillant https://github.com/dvaillant
+ * @author Maarten Mulders https://github.com/mthmulders
  */
 public class ThymeleafTemplateEngine extends TemplateEngine {
 
@@ -54,7 +56,7 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
      * @param suffix the suffix (e.g. .html)
      */
     public ThymeleafTemplateEngine(String prefix, String suffix) {
-        TemplateResolver defaultTemplateResolver = createDefaultTemplateResolver(prefix, suffix);
+        ITemplateResolver defaultTemplateResolver = createDefaultTemplateResolver(prefix, suffix);
         initialize(defaultTemplateResolver);
     }
 
@@ -63,14 +65,14 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
      *
      * @param templateResolver the template resolver.
      */
-    public ThymeleafTemplateEngine(TemplateResolver templateResolver) {
+    public ThymeleafTemplateEngine(ITemplateResolver templateResolver) {
         initialize(templateResolver);
     }
 
     /**
      * Initializes and sets the template resolver
      */
-    private void initialize(TemplateResolver templateResolver) {
+    private void initialize(ITemplateResolver templateResolver) {
         templateEngine = new org.thymeleaf.TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
     }
@@ -81,29 +83,27 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
         Object model = modelAndView.getModel();
 
         if (model instanceof Map) {
-            Map<String, ?> modelMap = (Map<String, ?>) model;
             Context context = new Context();
-            context.setVariables(modelMap);
+            context.setVariables((Map<String, Object>) model);
             return templateEngine.process(modelAndView.getViewName(), context);
         } else {
             throw new IllegalArgumentException("modelAndView.getModel() must return a java.util.Map");
         }
     }
 
-    private static TemplateResolver createDefaultTemplateResolver(String prefix, String suffix) {
-        TemplateResolver defaultTemplateResolver = new TemplateResolver();
-        defaultTemplateResolver.setTemplateMode(DEFAULT_TEMPLATE_MODE);
+    private static ITemplateResolver createDefaultTemplateResolver(String prefix, String suffix) {
+        final ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setTemplateMode(TemplateMode.HTML);
 
-        defaultTemplateResolver.setPrefix(
+        templateResolver.setPrefix(
                 prefix != null ? prefix : DEFAULT_PREFIX
         );
 
-        defaultTemplateResolver.setSuffix(
+        templateResolver.setSuffix(
                 suffix != null ? suffix : DEFAULT_SUFFIX
         );
 
-        defaultTemplateResolver.setCacheTTLMs(DEFAULT_CACHE_TTL_MS);
-        defaultTemplateResolver.setResourceResolver(new ClassLoaderResourceResolver());
-        return defaultTemplateResolver;
+        templateResolver.setCacheTTLMs(DEFAULT_CACHE_TTL_MS);
+        return templateResolver;
     }
 }
