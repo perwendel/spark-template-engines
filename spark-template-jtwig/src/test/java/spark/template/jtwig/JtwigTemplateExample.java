@@ -18,6 +18,7 @@ package spark.template.jtwig;
 
 import static spark.Spark.get;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,7 @@ public class JtwigTemplateExample {
 	public static void main(String[] args) {
 		Map map = new HashMap();
 		map.put("name", "Rafa");
+		map.put("today", new Date());
 
 		// hello.twig file is in resources/templates directory
 		get("/hello", (rq, rs) -> new ModelAndView(map, "hello.twig"),
