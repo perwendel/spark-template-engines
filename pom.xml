@@ -35,6 +35,7 @@
         <module>spark-template-jade</module>
         <module>spark-template-jetbrick</module>
         <module>spark-template-jinjava</module>
+        <module>spark-template-jtwig</module>
         <module>spark-template-mustache</module>
         <module>spark-template-pebble</module>
         <module>spark-template-thymeleaf</module>
