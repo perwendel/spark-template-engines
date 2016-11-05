@@ -29,11 +29,15 @@ import static spark.Spark.get;
  * @author Sam Pullara https://github.com/spullara
  */
 public class MustacheTemplateExample {
-    public static void main(String[] args) {
-        Map map = new HashMap();
-        map.put("name", "Sam");
 
-        // hello.mustache file is in resources/templates directory
-        get("/hello", (rq, rs) -> new ModelAndView(map, "hello.mustache"), new MustacheTemplateEngine());
+    public static void main(String[] args) {
+
+        get("/hello", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("message", "Hello Mustache!");
+            return new ModelAndView(model, "hello.mustache"); // hello.mustache file is in resources/templates directory
+        }, new MustacheTemplateEngine());
+
     }
+
 }
