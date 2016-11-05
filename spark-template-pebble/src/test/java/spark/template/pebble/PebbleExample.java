@@ -13,13 +13,12 @@ import static spark.Spark.get;
 public class PebbleExample {
 
     public static void main(String[] args) {
-        get("/hello", (request, response) -> {
-            Map<String, Object> attributes = new HashMap<>();
-            attributes.put("message", "Hello World!");
 
-            // The hello.pebble file is located in directory:
-            // src/test/resources/spark/template/pebble
-            return new ModelAndView(attributes, "templates/hello.pebble");
+        get("/hello", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("message", "Hello World!");
+            return new ModelAndView(model, "templates/hello.pebble"); // located in resources/spark/template/pebble
         }, new PebbleTemplateEngine());
+
     }
 }
