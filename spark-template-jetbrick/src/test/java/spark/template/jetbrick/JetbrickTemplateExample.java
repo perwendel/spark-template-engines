@@ -33,9 +33,7 @@ public class JetbrickTemplateExample {
 
         get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-
-            model.put("target", "spark-template-jetbrick");
-
+            model.put("message", "Hello Jetbrick!");
             return new ModelAndView(model, "template/hello.jetx");
         }, new JetbrickTemplateEngine());
 

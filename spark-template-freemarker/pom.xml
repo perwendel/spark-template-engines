@@ -22,6 +22,7 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
     <scm>
         <connection>scm:git:git@github.com:perwendel/spark-template-freemarker.git</connection>
         <developerConnection>scm:git:git@github.com:perwendel/spark-template-freemarker.git</developerConnection>
