@@ -44,7 +44,7 @@ public class JinjavaEngine extends TemplateEngine {
         context.registerFilter(filter);
     }
 
-    public void registerFuntion(ELFunctionDefinition function) {
+    public void registerFunction(ELFunctionDefinition function) {
         context.registerFunction(function);
     }
 

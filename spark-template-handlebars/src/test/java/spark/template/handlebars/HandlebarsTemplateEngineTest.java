@@ -15,7 +15,7 @@ public class HandlebarsTemplateEngineTest {
         String templateVariable = "Hello Handlebars!";
         Map<String, Object> model = new HashMap<>();
         model.put("message", templateVariable);
-        String expected = String.format("<h1>%s</h1><h2>The above text is set using the Handlebars template engine</h2>", templateVariable);
+        String expected = String.format("<h1>%s</h1>", templateVariable);
         String actual = new HandlebarsTemplateEngine().render(new ModelAndView(model, "hello.hbs"));
         assertEquals(expected, actual);
     }

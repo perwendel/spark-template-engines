@@ -10,11 +10,13 @@ import static spark.Spark.get;
 public class JinjavaTemplateExample {
 
     public static void main(String[] args) {
+
         get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("target", "spark-template-jinjava");
+            model.put("message", "Hello Jinjava!");
             return new ModelAndView(model, "template/hello.jin");
         }, new JinjavaEngine());
+
     }
 
 }

@@ -1,1 +1,1 @@
-<h1>${message}</h1><h2>The above text is set using the FreeMarker template engine</h2>
+<h1>${message}</h1>
