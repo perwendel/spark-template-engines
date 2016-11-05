@@ -32,7 +32,7 @@ public class HandlebarsTemplateExample {
 
     public static void main(String[] args) {
 
-        get("/hello", (rq, rs) -> {
+        get("/hello", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("message", "Hello Handlebars!");
             return new ModelAndView(model, "hello.hbs"); // located in resources/templates

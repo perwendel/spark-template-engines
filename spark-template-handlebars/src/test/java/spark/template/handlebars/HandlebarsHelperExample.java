@@ -20,7 +20,7 @@ public class HandlebarsHelperExample extends HandlebarsTemplateEngine {
         model.put("name", "Chris");
 
         // hello.hbs file is in resources/templates directory
-        get("/hello", (rq, rs) -> new ModelAndView(model, "hello_helpers.hbs"),
+        get("/hello", (request, response) -> new ModelAndView(model, "hello_helpers.hbs"),
             new HandlebarsHelperExample());
 
     }

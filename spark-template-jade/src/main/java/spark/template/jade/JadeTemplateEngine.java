@@ -32,15 +32,14 @@ public class JadeTemplateEngine extends TemplateEngine {
     private JadeConfiguration configuration;
 
     /**
-     * Construct a jade template engine defaulting to the 'templates' directory
-     * under the resource path.
+     * Construct a jade template engine with 'templates' as root directory.
      */
     public JadeTemplateEngine() {
         this("templates");
     }
 
     /**
-     * Construct a jade template engine.
+     * Construct a jade template engine with specified root.
      *
      * @param templateRoot the template root directory to use
      */
@@ -75,8 +74,7 @@ public class JadeTemplateEngine extends TemplateEngine {
     public String render(ModelAndView modelAndView) {
         try {
             JadeTemplate template = configuration.getTemplate(modelAndView.getViewName());
-            return configuration.renderTemplate(template,
-                                                (Map<String, Object>) modelAndView.getModel());
+            return configuration.renderTemplate(template, (Map<String, Object>) modelAndView.getModel());
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
         }
