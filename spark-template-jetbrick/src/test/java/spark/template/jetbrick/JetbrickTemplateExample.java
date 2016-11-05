@@ -25,13 +25,13 @@ import static spark.Spark.get;
 
 /**
  * spark-template-jetbrick example.
- * Test in browser localhost:4567
+ * Test in browser localhost:4567/hello
  */
 public class JetbrickTemplateExample {
 
     public static void main(String[] args) {
 
-        get("/", (request, response) -> {
+        get("/hello", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("message", "Hello Jetbrick!");
             return new ModelAndView(model, "template/hello.jetx");
