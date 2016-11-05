@@ -33,28 +33,10 @@ public final class ThymeleafExample {
 
         get("/hello", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("hello", "Thymeleaf World");
-            model.put("person", new Person("Foobar"));
-
-            return new ModelAndView(model, "hello");
+            model.put("message", "Hello Thymeleaf!");
+            return new ModelAndView(model, "hello"); // located in resources/templates
         }, new ThymeleafTemplateEngine());
 
-    }
-
-    public static class Person {
-        private String name;
-
-        public Person(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
     }
 
 }
