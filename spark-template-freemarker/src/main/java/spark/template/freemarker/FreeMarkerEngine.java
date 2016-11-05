@@ -22,14 +22,14 @@ import java.io.StringWriter;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import freemarker.template.Version;
 import spark.ModelAndView;
 import spark.TemplateEngine;
 
 /**
- * Renders HTML from Route output using FreeMarker.
- * FreeMarker configuration can be set with the {@link FreeMarkerEngine#setConfiguration(Configuration)}
- * method. If no configuration is set the default configuration will be used where
- * ftl files need to be put in directory spark/template/freemarker under the resources directory.
+ * FreeMarker configuration can be set with the {@link FreeMarkerEngine#setConfiguration(Configuration)} method.
+ * If no configuration is set the default configuration will be used where ftl
+ * files need to be put in directory resources/template/freemarker.
  *
  * @author Alex
  * @author Per Wendel
@@ -49,7 +49,7 @@ public class FreeMarkerEngine extends TemplateEngine {
     }
 
     /**
-     * Creates a FreeMarkerEngine with a configuration
+     * Creates a FreeMarkerEngine with the specified configuration
      *
      * @param configuration The Freemarker configuration
      */
@@ -65,31 +65,27 @@ public class FreeMarkerEngine extends TemplateEngine {
     public String render(ModelAndView modelAndView) {
         try {
             StringWriter stringWriter = new StringWriter();
-
             Template template = configuration.getTemplate(modelAndView.getViewName());
             template.process(modelAndView.getModel(), stringWriter);
-
             return stringWriter.toString();
-        } catch (IOException e) {
-            throw new IllegalArgumentException(e);
-        } catch (TemplateException e) {
+        } catch (IOException | TemplateException e) {
             throw new IllegalArgumentException(e);
         }
     }
 
     /**
      * Sets FreeMarker configuration.
-     * Note: If configuration is not set the default configuration
-     * will be used.
+     * Note: If configuration is not set the default configuration will be used.
      *
      * @param configuration the configuration to set
      */
+    @Deprecated // use constructor
     public void setConfiguration(Configuration configuration) {
         this.configuration = configuration;
     }
 
     private Configuration createDefaultConfiguration() {
-        Configuration configuration = new Configuration();
+        Configuration configuration = new Configuration(new Version(2, 3, 23));
         configuration.setClassForTemplateLoading(FreeMarkerEngine.class, "");
         return configuration;
     }

@@ -13,12 +13,9 @@ public class FreeMarkerExample {
     public static void main(String args[]) {
 
         get("/hello", (request, response) -> {
-            Map<String, Object> attributes = new HashMap<>();
-            attributes.put("message", "Hello World!");
-
-            // The hello.ftl file is located in directory:
-            // src/test/resources/spark/template/freemarker
-            return new ModelAndView(attributes, "hello.ftl");
+            Map<String, Object> model = new HashMap<>();
+            model.put("message", "Hello Freemarker!");
+            return new ModelAndView(model, "hello.ftl"); // located in src/test/resources/spark/template/freemarker
         }, new FreeMarkerEngine());
 
     }
