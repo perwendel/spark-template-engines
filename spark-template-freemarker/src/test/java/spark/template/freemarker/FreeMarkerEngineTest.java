@@ -16,7 +16,7 @@ public class FreeMarkerEngineTest {
         String templateVariable = "Hello Freemarker!";
         Map<String, Object> model = new HashMap<>();
         model.put("message", templateVariable);
-        String expected = String.format("<h1>%s</h1><h2>The above text is set using the FreeMarker template engine</h2>", "Hello Freemarker!");
+        String expected = String.format("<h1>%s</h1><h2>The above text is set using the FreeMarker template engine</h2>", templateVariable);
         String actual = new FreeMarkerEngine().render(new ModelAndView(model, "hello.ftl"));
         assertEquals(expected, actual);
     }

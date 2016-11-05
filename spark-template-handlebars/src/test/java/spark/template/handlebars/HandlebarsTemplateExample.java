@@ -29,11 +29,15 @@ import static spark.Spark.get;
  * @author Sam Pullara https://github.com/spullara
  */
 public class HandlebarsTemplateExample {
-    public static void main(String[] args) {
-        Map map = new HashMap();
-        map.put("name", "Sam");
 
-        // hello.hbs file is in resources/templates directory
-        get("/hello", (rq, rs) -> new ModelAndView(map, "hello.hbs"), new HandlebarsTemplateEngine());
+    public static void main(String[] args) {
+
+        get("/hello", (rq, rs) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("message", "Hello Handlebars!");
+            return new ModelAndView(model, "hello.hbs"); // located in resources/templates
+        }, new HandlebarsTemplateEngine());
+
     }
+
 }

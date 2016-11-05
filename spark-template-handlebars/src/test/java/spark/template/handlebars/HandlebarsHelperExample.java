@@ -16,11 +16,11 @@ public class HandlebarsHelperExample extends HandlebarsTemplateEngine {
     }
 
     public static void main(String[] args) {
-        Map map = new HashMap();
-        map.put("name", "Chris");
+        Map<String, Object> model = new HashMap<>();
+        model.put("name", "Chris");
 
         // hello.hbs file is in resources/templates directory
-        get("/hello", (rq, rs) -> new ModelAndView(map, "hello.hbs"),
+        get("/hello", (rq, rs) -> new ModelAndView(model, "hello_helpers.hbs"),
             new HandlebarsHelperExample());
 
     }
