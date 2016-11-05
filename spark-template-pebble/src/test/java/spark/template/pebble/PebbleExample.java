@@ -1,9 +1,9 @@
 package spark.template.pebble;
 
-import spark.ModelAndView;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import spark.ModelAndView;
 
 import static spark.Spark.get;
 
@@ -12,14 +12,14 @@ import static spark.Spark.get;
  */
 public class PebbleExample {
 
-	public static void main(String[] args) {
-		get("/hello", (request, response) -> {
-			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("message", "Hello World!");
-			
-			// The hello.pebble file is located in directory:
-			// src/test/resources/spark/template/pebble
-			return new ModelAndView(attributes, "templates/hello.pebble");
-		}, new PebbleTemplateEngine());
-	}
+    public static void main(String[] args) {
+        get("/hello", (request, response) -> {
+            Map<String, Object> attributes = new HashMap<>();
+            attributes.put("message", "Hello World!");
+
+            // The hello.pebble file is located in directory:
+            // src/test/resources/spark/template/pebble
+            return new ModelAndView(attributes, "templates/hello.pebble");
+        }, new PebbleTemplateEngine());
+    }
 }

@@ -31,33 +31,32 @@ import spark.TemplateEngine;
  */
 public class JtwigTemplateEngine extends TemplateEngine {
 
-	/**
-	 * Templates directory in resources
-	 */
-	private String templatesDirectory;
+    /**
+     * Templates directory in resources
+     */
+    private String templatesDirectory;
 
-	/**
-	 * Setup default templates directory
-	 */
-	public JtwigTemplateEngine() {
-		this.templatesDirectory = "templates";
-	}
+    /**
+     * Setup default templates directory
+     */
+    public JtwigTemplateEngine() {
+        this.templatesDirectory = "templates";
+    }
 
-	/**
-	 * Setup custom templates directory
-	 * 
-	 * @param customTemplatesDirectory
-	 *            The custom templates directory
-	 */
-	public JtwigTemplateEngine(String customTemplatesDirectory) {
-		this.templatesDirectory = customTemplatesDirectory;
-	}
+    /**
+     * Setup custom templates directory
+     *
+     * @param customTemplatesDirectory The custom templates directory
+     */
+    public JtwigTemplateEngine(String customTemplatesDirectory) {
+        this.templatesDirectory = customTemplatesDirectory;
+    }
 
-	@Override
-	public String render(ModelAndView modelAndView) {
-		String viewName = templatesDirectory + "/" + modelAndView.getViewName();
-		JtwigTemplate template = JtwigTemplate.classpathTemplate(viewName);
-		JtwigModel model = JtwigModel.newModel((Map) modelAndView.getModel());
-		return template.render(model);
-	}
+    @Override
+    public String render(ModelAndView modelAndView) {
+        String viewName = templatesDirectory + "/" + modelAndView.getViewName();
+        JtwigTemplate template = JtwigTemplate.classpathTemplate(viewName);
+        JtwigModel model = JtwigModel.newModel((Map) modelAndView.getModel());
+        return template.render(model);
+    }
 }

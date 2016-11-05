@@ -69,6 +69,22 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
         initialize(templateResolver);
     }
 
+    private static ITemplateResolver createDefaultTemplateResolver(String prefix, String suffix) {
+        final ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setTemplateMode(TemplateMode.HTML);
+
+        templateResolver.setPrefix(
+                prefix != null ? prefix : DEFAULT_PREFIX
+        );
+
+        templateResolver.setSuffix(
+                suffix != null ? suffix : DEFAULT_SUFFIX
+        );
+
+        templateResolver.setCacheTTLMs(DEFAULT_CACHE_TTL_MS);
+        return templateResolver;
+    }
+
     /**
      * Initializes and sets the template resolver
      */
@@ -89,21 +105,5 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
         } else {
             throw new IllegalArgumentException("modelAndView.getModel() must return a java.util.Map");
         }
-    }
-
-    private static ITemplateResolver createDefaultTemplateResolver(String prefix, String suffix) {
-        final ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setTemplateMode(TemplateMode.HTML);
-
-        templateResolver.setPrefix(
-                prefix != null ? prefix : DEFAULT_PREFIX
-        );
-
-        templateResolver.setSuffix(
-                suffix != null ? suffix : DEFAULT_SUFFIX
-        );
-
-        templateResolver.setCacheTTLMs(DEFAULT_CACHE_TTL_MS);
-        return templateResolver;
     }
 }

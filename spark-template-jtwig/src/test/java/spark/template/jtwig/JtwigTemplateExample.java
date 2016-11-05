@@ -16,13 +16,13 @@
  */
 package spark.template.jtwig;
 
-import static spark.Spark.get;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import spark.ModelAndView;
+
+import static spark.Spark.get;
 
 /**
  * Jtwig template engine example
@@ -30,13 +30,13 @@ import spark.ModelAndView;
  * @author Rafael Andrade de Oliveira https://github.com/eurafa
  */
 public class JtwigTemplateExample {
-	public static void main(String[] args) {
-		Map map = new HashMap();
-		map.put("name", "Rafa");
-		map.put("today", new Date());
+    public static void main(String[] args) {
+        Map map = new HashMap();
+        map.put("name", "Rafa");
+        map.put("today", new Date());
 
-		// hello.twig file is in resources/templates directory
-		get("/hello", (rq, rs) -> new ModelAndView(map, "hello.twig"),
-				new JtwigTemplateEngine());
-	}
+        // hello.twig file is in resources/templates directory
+        get("/hello", (rq, rs) -> new ModelAndView(map, "hello.twig"),
+            new JtwigTemplateEngine());
+    }
 }

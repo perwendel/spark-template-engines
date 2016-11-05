@@ -1,19 +1,15 @@
 package spark.template.water;
 
+import java.util.Locale;
+
 import org.watertemplate.Template;
+
 import spark.Request;
 import spark.ResponseTransformer;
-
-import java.util.Locale;
 
 public class WaterTemplateEngine implements ResponseTransformer {
 
     private static final WaterTemplateEngine waterTemplateEngine = new WaterTemplateEngine();
-
-    @Override
-    public String render(final Object o) throws Exception {
-        return ((Render) o).render();
-    }
 
     public static Render render(final Template template, final Request request) {
         return new Render(template, request.raw().getLocale());
@@ -21,6 +17,11 @@ public class WaterTemplateEngine implements ResponseTransformer {
 
     public static WaterTemplateEngine waterEngine() {
         return waterTemplateEngine;
+    }
+
+    @Override
+    public String render(final Object o) throws Exception {
+        return ((Render) o).render();
     }
 
     //
