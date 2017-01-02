@@ -36,7 +36,7 @@ public class ClosureTemplateExample {
             Map<String, Object> model = new HashMap<>();
             model.put("message", "Hello Soy!");
             return new ModelAndView(model, "spark.template.closure.hello");
-        }, new ClosureTemplateEngine("./src/test/resources/templates/hello.soy"));
+        }, new ClosureTemplateEngine("hello.soy"));
 
     }
 

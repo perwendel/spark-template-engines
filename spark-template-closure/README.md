@@ -21,7 +21,8 @@ public class ClosureTemplateExample {
 
         get("/hello",
             (req, res) -> new ModelAndView(map, "spark.template.closure.hello"),
-            new ClosureTemplateEngine("./src/test/resources/templates/hello.soy"));
+            // make this filename relative to /templates dir inside your resources folder.
+            new ClosureTemplateEngine("hello.soy"));
     }
 }
 ```

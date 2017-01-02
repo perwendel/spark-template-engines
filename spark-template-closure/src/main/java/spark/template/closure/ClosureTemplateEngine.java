@@ -22,9 +22,7 @@ import com.google.template.soy.tofu.SoyTofu;
 import spark.ModelAndView;
 import spark.TemplateEngine;
 
-import java.io.File;
 import java.util.Map;
-
 
 /**
  * Google's Closure template engine for sparkjava.
@@ -39,7 +37,7 @@ public class ClosureTemplateEngine extends TemplateEngine {
     /**
      * Constructs a closure template engine with the given soy file paths.
      *
-     * @param soyFilePaths one or more paths to .soy files.
+     * @param soyFilePaths one or more paths to .soy files relative to /templates in the resources folder.
      * @throws IllegalArgumentException if the input is null.
      */
     public ClosureTemplateEngine(final String... soyFilePaths) {
@@ -47,7 +45,7 @@ public class ClosureTemplateEngine extends TemplateEngine {
 
         SoyFileSet.Builder sfsBuilder = SoyFileSet.builder();
         for (final String soyFilePath : soyFilePaths) {
-            sfsBuilder = sfsBuilder.add(new File(soyFilePath));
+            sfsBuilder = sfsBuilder.add(ClosureTemplateEngine.class.getResource("/templates/" + soyFilePath));
         }
 
         soyTofu = sfsBuilder.build().compileToTofu();

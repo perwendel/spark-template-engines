@@ -17,7 +17,7 @@ public class ClosureTemplateEngineTest {
 
         final String expected = String.format("<h1>%s</h1>", templateVariable);
 
-        final String actual = new ClosureTemplateEngine("./src/test/resources/templates/hello.soy")
+        final String actual = new ClosureTemplateEngine("hello.soy")
                 .render(new ModelAndView(model, "spark.template.closure.hello"));
 
         assertEquals(expected, actual);
