@@ -41,6 +41,7 @@
         <module>spark-template-thymeleaf</module>
         <module>spark-template-velocity</module>
         <module>spark-template-water</module>
+        <module>spark-template-rocker</module>
     </modules>
 
     <build>
