@@ -9,7 +9,7 @@
     <groupId>com.sparkjava</groupId>
     <artifactId>spark-template-mustache</artifactId>
     <packaging>jar</packaging>
-    <version>2.6-SNAPSHOT</version>
+    <version>2.5.5</version>
 
     <name>spark-template-mustache</name>
     <description>Mustache Template Engine implementation for Spark</description>
@@ -31,7 +31,7 @@
         <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-core</artifactId>
-            <version>2.5.1</version>
+            <version>2.5.5</version>
         </dependency>
         <dependency>
             <groupId>com.github.spullara.mustache.java</groupId>
