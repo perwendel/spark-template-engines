@@ -30,6 +30,7 @@
     </properties>
 
     <modules>
+        <module>spark-template-closure</module>
         <module>spark-template-freemarker</module>
         <module>spark-template-handlebars</module>
         <module>spark-template-jade</module>
