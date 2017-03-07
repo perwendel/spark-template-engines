@@ -23,6 +23,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
+import java.util.Locale;
+
 import spark.ModelAndView;
 import spark.TemplateEngine;
 
@@ -36,7 +38,6 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
 
     private static final String DEFAULT_PREFIX = "templates/";
     private static final String DEFAULT_SUFFIX = ".html";
-    private static final String DEFAULT_TEMPLATE_MODE = "XHTML";
     private static final long DEFAULT_CACHE_TTL_MS = 3600000L;
 
     private org.thymeleaf.TemplateEngine templateEngine;
@@ -96,10 +97,22 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
     @Override
     @SuppressWarnings("unchecked")
     public String render(ModelAndView modelAndView) {
+        return render(modelAndView, Locale.getDefault());
+    }
+
+  /**
+   * Process the specified template (usually the template name).
+   * Output will be written into a String that will be returned from calling this method,
+   * once template processing has finished.
+   * @param modelAndView model and view
+   * @param locale A Locale object represents a specific geographical, political, or cultural region
+   * @return processed template
+   */
+    public String render(ModelAndView modelAndView, Locale locale) {
         Object model = modelAndView.getModel();
 
         if (model instanceof Map) {
-            Context context = new Context();
+            Context context = new Context(locale);
             context.setVariables((Map<String, Object>) model);
             return templateEngine.process(modelAndView.getViewName(), context);
         } else {
