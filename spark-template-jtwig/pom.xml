@@ -43,7 +43,7 @@
         <dependency>
             <groupId>org.jtwig</groupId>
             <artifactId>jtwig-core</artifactId>
-            <version>5.65</version>
+            <version>5.85.3.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
