@@ -5,6 +5,7 @@ Spark templating system using [jade4j] (https://github.com/neuland/jade4j).
 
 ```java
 import spark.ModelAndView;
+import spark.template.jade.JadeTemplateEngine;
 
 import java.util.HashMap;
 import java.util.Map;
