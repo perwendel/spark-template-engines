@@ -11,7 +11,7 @@ import java.util.Map;
 
 import spark.Request;
 import spark.Response;
-import spark.template.velocity.VelocityEngine;
+import spark.template.velocity.VelocityTemplateEngine;
 
 /**
  * VelocityTemplateRoute example.
