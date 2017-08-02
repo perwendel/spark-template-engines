@@ -19,6 +19,7 @@ package spark.template.thymeleaf;
 import java.util.Map;
 
 import org.thymeleaf.context.Context;
+import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
@@ -92,6 +93,7 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
     private void initialize(ITemplateResolver templateResolver) {
         templateEngine = new org.thymeleaf.TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
+        templateEngine.addDialect(new Java8TimeDialect());
     }
 
     @Override
