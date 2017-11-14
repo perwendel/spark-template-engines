@@ -5,7 +5,7 @@
     <groupId>com.sparkjava</groupId>
     <artifactId>spark-template-engines</artifactId>
     <packaging>pom</packaging>
-    <version>2.6-SNAPSHOT</version>
+    <version>2.7.1</version>
 
     <name>spark-template-engines</name>
     <description>Template Engine View Route implementations for Spark</description>

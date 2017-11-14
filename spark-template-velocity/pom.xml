@@ -9,7 +9,7 @@
     <groupId>com.sparkjava</groupId>
     <artifactId>spark-template-velocity</artifactId>
     <packaging>jar</packaging>
-    <version>2.6-SNAPSHOT</version>
+    <version>2.7.1</version>
 
     <name>spark-template-velocity</name>
     <description>Apache Velocity Template View Route implementation for Spark</description>

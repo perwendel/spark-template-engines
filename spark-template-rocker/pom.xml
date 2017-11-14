@@ -9,7 +9,7 @@
     <groupId>com.sparkjava</groupId>
     <artifactId>spark-template-rocker</artifactId>
     <packaging>jar</packaging>
-    <version>2.6-SNAPSHOT</version>
+    <version>2.7.1</version>
 
     <name>spark-template-rocker</name>
     <description>Rocker Template Engine implementation for Spark</description>

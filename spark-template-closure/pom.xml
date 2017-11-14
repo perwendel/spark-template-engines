@@ -9,7 +9,7 @@
     <groupId>com.sparkjava</groupId>
     <artifactId>spark-template-closure</artifactId>
     <packaging>jar</packaging>
-    <version>2.6-SNAPSHOT</version>
+    <version>2.7.1</version>
 
     <name>spark-template-closure</name>
     <description>Closure Template Engine implementation for Spark</description>
