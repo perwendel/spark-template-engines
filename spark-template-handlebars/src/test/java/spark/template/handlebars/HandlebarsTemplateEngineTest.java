@@ -20,4 +20,15 @@ public class HandlebarsTemplateEngineTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void renderUsingPrefix() throws Exception {
+        String templateVariable = "Hello Handlebars!";
+        Map<String, Object> model = new HashMap<>();
+        model.put("message", templateVariable);
+        String expected = String.format("<h1>%s</h1>", templateVariable);
+        String actual = new HandlebarsTemplateEngine(HandlebarsTemplateEngine.DEFAULT_RESOURCE_ROOT, ".hbs")
+                .render(new ModelAndView(model, "hello"));
+        assertEquals(expected, actual);
+    }
+
 }
