@@ -25,7 +25,7 @@ public final class VelocityExample {
             model.put("hello", "Velocity World");
             model.put("person", new Person("Foobar"));
 
-            // The wm files are located under the resources directory
+            // The vm files are located under the resources directory
             return new ModelAndView(model, "hello.vm");
         }, new VelocityTemplateEngine());
 
