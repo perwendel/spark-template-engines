@@ -31,9 +31,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.mitchellbosecke</groupId>
+            <groupId>io.pebbletemplates</groupId>
             <artifactId>pebble</artifactId>
-            <version>2.3.0</version>
+            <version>3.0.6</version>
         </dependency>
         <dependency>
             <groupId>com.sparkjava</groupId>
