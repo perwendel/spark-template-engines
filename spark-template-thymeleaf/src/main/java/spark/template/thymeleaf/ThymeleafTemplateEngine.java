@@ -40,6 +40,7 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
     private static final String DEFAULT_PREFIX = "templates/";
     private static final String DEFAULT_SUFFIX = ".html";
     private static final long DEFAULT_CACHE_TTL_MS = 3600000L;
+    private static final long DEFAULT_CHARACTER_ENCODING = "UTF-8";
 
     private org.thymeleaf.TemplateEngine templateEngine;
 
@@ -84,6 +85,7 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
         );
 
         templateResolver.setCacheTTLMs(DEFAULT_CACHE_TTL_MS);
+        templateResolver.setCharacterEncoding(DEFAULT_CHARACTER_ENCODING);
         return templateResolver;
     }
 
