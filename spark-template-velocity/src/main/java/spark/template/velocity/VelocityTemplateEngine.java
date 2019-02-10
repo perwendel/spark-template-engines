@@ -75,12 +75,13 @@ public class VelocityTemplateEngine extends TemplateEngine {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("unchecked")
     public String render(ModelAndView modelAndView) {
         String templateEncoding = Optional.ofNullable(this.encoding).orElse(StandardCharsets.UTF_8.name());
         Template template = velocityEngine.getTemplate(modelAndView.getViewName(), templateEncoding);
         Object model = modelAndView.getModel();
         if (model instanceof Map) {
-            Map<?, ?> modelMap = (Map<?, ?>) model;
+            Map<String, Object> modelMap = (Map<String, Object>) model;
             VelocityContext context = new VelocityContext(modelMap);
             StringWriter writer = new StringWriter();
             template.merge(context, writer);
