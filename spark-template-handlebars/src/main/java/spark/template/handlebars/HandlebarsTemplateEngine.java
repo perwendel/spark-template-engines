@@ -17,9 +17,8 @@
 package spark.template.handlebars;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.concurrent.TimeUnit;
-
-import org.eclipse.jetty.io.RuntimeIOException;
 
 import spark.ModelAndView;
 import spark.TemplateEngine;
@@ -75,7 +74,7 @@ public class HandlebarsTemplateEngine extends TemplateEngine {
             Template template = handlebars.compile(viewName);
             return template.apply(modelAndView.getModel());
         } catch (IOException e) {
-            throw new RuntimeIOException(e);
+            throw new UncheckedIOException(e);
         }
     }
 }
