@@ -41,7 +41,7 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
     private static final String DEFAULT_SUFFIX = ".html";
     private static final long DEFAULT_CACHE_TTL_MS = 3600000L;
 
-    private org.thymeleaf.TemplateEngine templateEngine;
+    protected org.thymeleaf.TemplateEngine templateEngine;
 
     /**
      * Constructs a default thymeleaf template engine.
