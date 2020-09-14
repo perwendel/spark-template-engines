@@ -17,9 +17,8 @@
 package spark.template.mustache;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.io.StringWriter;
-
-import org.eclipse.jetty.io.RuntimeIOException;
 
 import spark.ModelAndView;
 import spark.TemplateEngine;
@@ -70,7 +69,7 @@ public class MustacheTemplateEngine extends TemplateEngine {
         try {
             mustache.execute(stringWriter, modelAndView.getModel()).close();
         } catch (IOException e) {
-            throw new RuntimeIOException(e);
+            throw new UncheckedIOException(e);
         }
         return stringWriter.toString();
     }
