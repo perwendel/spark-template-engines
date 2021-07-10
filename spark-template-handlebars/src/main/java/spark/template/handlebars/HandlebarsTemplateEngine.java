@@ -16,14 +16,6 @@
  */
 package spark.template.handlebars;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
-import org.eclipse.jetty.io.RuntimeIOException;
-
-import spark.ModelAndView;
-import spark.TemplateEngine;
-
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.cache.GuavaTemplateCache;
@@ -32,6 +24,12 @@ import com.github.jknack.handlebars.io.TemplateLoader;
 import com.github.jknack.handlebars.io.TemplateSource;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import org.eclipse.jetty.io.RuntimeIOException;
+import spark.ModelAndView;
+import spark.TemplateEngine;
+
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Renders HTML from Route output using
@@ -40,13 +38,18 @@ import com.google.common.cache.CacheBuilder;
  */
 public class HandlebarsTemplateEngine extends TemplateEngine {
 
+    /**
+     * Default resource root used if none provided.
+     */
+    public static final String DEFAULT_RESOURCE_ROOT = "/templates";
+
     protected Handlebars handlebars;
 
     /**
      * Constructs a handlebars template engine
      */
     public HandlebarsTemplateEngine() {
-        this("/templates");
+        this(DEFAULT_RESOURCE_ROOT);
     }
 
     /**
@@ -55,14 +58,36 @@ public class HandlebarsTemplateEngine extends TemplateEngine {
      * @param resourceRoot the resource root
      */
     public HandlebarsTemplateEngine(String resourceRoot) {
+        this(resourceRoot, null);
+    }
+
+    /**
+     * Constructs a handlebars template engine
+     *
+     * @param resourceRoot the resource root
+     * @param suffix       templates suffix
+     */
+    public HandlebarsTemplateEngine(String resourceRoot, String suffix) {
+        this(resourceRoot, suffix, null);
+    }
+
+    /**
+     * Constructs a handlebars template engine
+     *
+     * @param resourceRoot           the resource root
+     * @param suffix                 templates suffix
+     * @param cacheDurationInMinutes template cache duration in minutes
+     */
+    public HandlebarsTemplateEngine(String resourceRoot, String suffix, Integer cacheDurationInMinutes) {
         TemplateLoader templateLoader = new ClassPathTemplateLoader();
-        templateLoader.setPrefix(resourceRoot);
-        templateLoader.setSuffix(null);
+        templateLoader.setPrefix(resourceRoot != null ? resourceRoot : DEFAULT_RESOURCE_ROOT);
+        templateLoader.setSuffix(suffix);
 
         handlebars = new Handlebars(templateLoader);
 
         // Set Guava cache.
-        Cache<TemplateSource, Template> cache = CacheBuilder.newBuilder().expireAfterWrite(10, TimeUnit.MINUTES)
+        Cache<TemplateSource, Template> cache = CacheBuilder.newBuilder()
+                .expireAfterWrite(cacheDurationInMinutes != null ? cacheDurationInMinutes : 10, TimeUnit.MINUTES)
                 .maximumSize(1000).build();
 
         handlebars = handlebars.with(new GuavaTemplateCache(cache));
