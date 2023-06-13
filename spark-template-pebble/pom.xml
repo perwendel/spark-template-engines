@@ -21,12 +21,12 @@
 
     <distributionManagement>
         <repository>
-            <id>app-engine</id>
-            <url>https://kamenitxans-maven-repository.appspot.com/</url>
+            <id>kamenitxan-nexus</id>
+            <url>https://nexus.kamenitxan.eu/repository/jakon/</url>
         </repository>
         <snapshotRepository>
-            <id>app-engine</id>
-            <url>https://kamenitxans-maven-repository.appspot.com/</url>
+            <id>kamenitxan-nexus</id>
+            <url>https://nexus.kamenitxan.eu/repository/jakon/</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -40,7 +40,7 @@
         <dependency>
             <groupId>io.pebbletemplates</groupId>
             <artifactId>pebble</artifactId>
-            <version>3.1.0</version>
+            <version>3.1.6</version>
         </dependency>
         <dependency>
             <groupId>com.sparkjava</groupId>

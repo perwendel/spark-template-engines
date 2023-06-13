@@ -9,10 +9,10 @@ Please follow the official Spark [style guidelines](https://github.com/perwendel
 
 ```xml
 <repositories>
-    <repository>
-        <id>kamenitxan-maven-repository</id>
-        <url>https://kamenitxans-maven-repository.appspot.com/</url>
-    </repository>
+	<repository>
+		<id>kamenitxan-nexus</id>
+		<url>https://nexus.kamenitxan.eu/repository/jakon/</url>
+	</repository>
 </repositories>
 
 <dependency>

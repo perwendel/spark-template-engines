@@ -21,15 +21,14 @@
 
     <distributionManagement>
         <repository>
-            <id>app-engine</id>
-            <url>https://kamenitxans-maven-repository.appspot.com/</url>
+            <id>kamenitxan-nexus</id>
+            <url>https://nexus.kamenitxan.eu/repository/jakon/</url>
         </repository>
         <snapshotRepository>
-            <id>app-engine</id>
-            <url>https://kamenitxans-maven-repository.appspot.com/</url>
+            <id>kamenitxan-nexus</id>
+            <url>https://nexus.kamenitxan.eu/repository/jakon/</url>
         </snapshotRepository>
     </distributionManagement>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
