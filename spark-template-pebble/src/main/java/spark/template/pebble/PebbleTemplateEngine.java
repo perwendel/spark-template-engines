@@ -20,13 +20,13 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Map;
 
+import io.pebbletemplates.pebble.PebbleEngine;
+import io.pebbletemplates.pebble.error.PebbleException;
+import io.pebbletemplates.pebble.loader.Loader;
+import io.pebbletemplates.pebble.template.PebbleTemplate;
 import spark.ModelAndView;
 import spark.TemplateEngine;
 
-import com.mitchellbosecke.pebble.PebbleEngine;
-import com.mitchellbosecke.pebble.error.PebbleException;
-import com.mitchellbosecke.pebble.loader.Loader;
-import com.mitchellbosecke.pebble.template.PebbleTemplate;
 
 /**
  * Template Engine based on Pebble.
