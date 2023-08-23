@@ -5,7 +5,7 @@
     <groupId>com.sparkjava</groupId>
     <artifactId>spark-template-pebble</artifactId>
     <packaging>jar</packaging>
-    <version>2.7.1-jakon.2</version>
+    <version>2.7.1-jakon.3</version>
 
     <name>spark-template-pebble</name>
     <description>Pebble Template Engine implementation for Spark</description>
@@ -32,7 +32,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spark.version>2.9.4</spark.version>
+        <spark.version>2.9.4-jakon-3</spark.version>
         <junit.version>4.13.1</junit.version>
     </properties>
 
@@ -43,7 +43,7 @@
             <version>3.2.1</version>
         </dependency>
         <dependency>
-            <groupId>com.sparkjava</groupId>
+            <groupId>com.intellisrc</groupId>
             <artifactId>spark-core</artifactId>
             <version>${spark.version}</version>
         </dependency>
@@ -62,8 +62,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>11</source>
+                    <target>11</target>
                     <optimize>true</optimize>
                     <debug>true</debug>
                 </configuration>
